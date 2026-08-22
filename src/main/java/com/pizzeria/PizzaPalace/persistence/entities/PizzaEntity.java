@@ -18,18 +18,24 @@ public class PizzaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pizza_id", unique = true, nullable = false)
-    private Long pizzaID;
+    private Long pizzaId;
+
     @Column(unique = true, nullable = false, length = 50)
     private String name;
+
     @Column(nullable = false, length = 150)
     private String description;
+
     @DecimalMin(value = "0.00", inclusive = true)
-    @Column(nullable = false, precision = 12, scale = 2)
+    @Column(nullable = false, precision = 12, scale = 2, columnDefinition = "numeric(12,2)")
     private BigDecimal price;
+
     @Column(nullable = false)
     private boolean isVegetarian;
+
     @Column(nullable = false)
     private boolean isVegan;
+
     @Column(nullable = false)
     private boolean isAvailable;
 }
