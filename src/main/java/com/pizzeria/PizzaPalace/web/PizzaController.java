@@ -4,9 +4,7 @@ import com.pizzeria.PizzaPalace.domain.services.PizzaService;
 import com.pizzeria.PizzaPalace.persistence.entities.PizzaEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +21,15 @@ public class PizzaController {
     @GetMapping("")
     public ResponseEntity<List<PizzaEntity>> getAllPizzas(){
         return ResponseEntity.ok(this.pizzaService.getAll());
+    }
+
+    @GetMapping("/{idPizza}")
+    public ResponseEntity<PizzaEntity> getById(@PathVariable Long idPizza){
+        return ResponseEntity.ok(this.pizzaService.getById(idPizza));
+    }
+
+    @PostMapping("")
+    public ResponseEntity<PizzaEntity> addPizza(@RequestBody PizzaEntity pizzaEntity){
+        return ResponseEntity.ok(this.pizzaService.addPizza(pizzaEntity));
     }
 }
