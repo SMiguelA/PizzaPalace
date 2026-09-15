@@ -36,4 +36,12 @@ public class PizzaService {
     public PizzaEntity addPizza(PizzaEntity pizzaEntity){
         return this.pizzaRepository.save(pizzaEntity);
     }
+
+    public boolean exist(Long idPizza){
+        return this.pizzaRepository.existsById(idPizza);
+    }
+
+    public void deleteById(Long idPizza){
+        this.pizzaRepository.deleteById(idPizza);
+    }
 }

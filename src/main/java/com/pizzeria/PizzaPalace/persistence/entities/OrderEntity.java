@@ -1,5 +1,6 @@
 package com.pizzeria.PizzaPalace.persistence.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import lombok.Getter;
@@ -38,11 +39,12 @@ public class OrderEntity {
     @Column(length = 200)
     private String additionalNotes;
 
-    @OneToOne
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", insertable = false, updatable = false)
     private CustomerEntity customer;
 
     // referenciamos el nombre del atributo de la entidad donde realizamos el join, en este caso desde OrderItemEntity
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     private List<OrderItemEntity> itemsAdded;
 }

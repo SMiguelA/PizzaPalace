@@ -1,5 +1,6 @@
 package com.pizzeria.PizzaPalace.persistence.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,6 +47,8 @@ public class OrderItemEntity {
     // si esta entidad pueden ser varios para uno solo, entonces es many to one
     // si esta entidad es solo una para varios es one to many
     @ManyToOne
+    // Para evitar llamadas recursivas infinitas al serializar
+    @JsonIgnore
     @JoinColumn(name = "order_id", referencedColumnName = "order_id", insertable = false, updatable = false)
     private OrderEntity order;
 }
