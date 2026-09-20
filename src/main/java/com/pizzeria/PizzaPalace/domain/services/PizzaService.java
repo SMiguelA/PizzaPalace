@@ -33,6 +33,22 @@ public class PizzaService {
         return this.pizzaRepository.findById(id).orElse(null);
     }
 
+    public PizzaEntity getByName(String name){
+        return this.pizzaRepository.findAllByIsAvailableTrueAndNameIgnoreCase(name);
+    }
+
+    public List<PizzaEntity> getAvailable(){
+        return this.pizzaRepository.findAllByIsAvailableTrueOrderByPrice();
+    }
+
+    public List<PizzaEntity> getWith(String ingredient){
+        return this.pizzaRepository.findAllByIsAvailableTrueAndDescriptionContainingIgnoreCase(ingredient);
+    }
+
+    public List<PizzaEntity> getWithout(String ingredient){
+        return this.pizzaRepository.findAllByIsAvailableTrueAndDescriptionNotContainingIgnoreCase(ingredient);
+    }
+
     public PizzaEntity addPizza(PizzaEntity pizzaEntity){
         return this.pizzaRepository.save(pizzaEntity);
     }
@@ -44,4 +60,5 @@ public class PizzaService {
     public void deleteById(Long idPizza){
         this.pizzaRepository.deleteById(idPizza);
     }
+
 }
