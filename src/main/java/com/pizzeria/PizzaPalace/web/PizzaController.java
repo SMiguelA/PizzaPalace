@@ -3,9 +3,11 @@ package com.pizzeria.PizzaPalace.web;
 import com.pizzeria.PizzaPalace.domain.services.PizzaService;
 import com.pizzeria.PizzaPalace.persistence.entities.PizzaEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -19,13 +21,17 @@ public class PizzaController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<PizzaEntity>> getAllPizzas(){
-        return ResponseEntity.ok(this.pizzaService.getAll());
+    public ResponseEntity<Page<PizzaEntity>> getAllPizzas(@RequestParam(defaultValue = "0") int page,
+                                                          @RequestParam(defaultValue = "8") int elements){
+        return ResponseEntity.ok(this.pizzaService.getAll(page, elements));
     }
 
     @GetMapping("/available")
-    public ResponseEntity<List<PizzaEntity>> getAvailable(){
-        return ResponseEntity.ok(this.pizzaService.getAvailable());
+    public ResponseEntity<Page<PizzaEntity>> getAvailable(@RequestParam(defaultValue = "0") int page,
+                                                          @RequestParam(defaultValue = "8") int elements,
+                                                          @RequestParam(defaultValue = "price") String sortBy,
+                                                          @RequestParam(defaultValue = "ASC") String sortDirection){
+        return ResponseEntity.ok(this.pizzaService.getAvailable(page, elements, sortBy, sortDirection));
     }
 
     @GetMapping("/{idPizza}")
@@ -46,6 +52,11 @@ public class PizzaController {
     @GetMapping("/without/{ingredient}")
     public ResponseEntity<List<PizzaEntity>> getWithout(@PathVariable String ingredient){
         return ResponseEntity.ok(this.pizzaService.getWithout(ingredient));
+    }
+
+    @GetMapping("/price/{price}")
+    public ResponseEntity<List<PizzaEntity>> getCheaper(@PathVariable BigDecimal price){
+        return ResponseEntity.ok(this.pizzaService.getTopCheap(price));
     }
 
     @PostMapping("")
