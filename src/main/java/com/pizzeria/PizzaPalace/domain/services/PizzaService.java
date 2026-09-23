@@ -1,5 +1,6 @@
 package com.pizzeria.PizzaPalace.domain.services;
 
+import com.pizzeria.PizzaPalace.domain.dto.UpdatePizzaPriceDto;
 import com.pizzeria.PizzaPalace.persistence.entities.PizzaEntity;
 import com.pizzeria.PizzaPalace.persistence.entityRepositories.PizzaPagSortRepository;
 import com.pizzeria.PizzaPalace.persistence.entityRepositories.PizzaRepository;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -72,5 +74,10 @@ public class PizzaService {
 
     public void deleteById(Long idPizza){
         this.pizzaRepository.deleteById(idPizza);
+    }
+
+    @Transactional
+    public void updatePrice(UpdatePizzaPriceDto dto){
+        this.pizzaRepository.updatePrice(dto);
     }
 }

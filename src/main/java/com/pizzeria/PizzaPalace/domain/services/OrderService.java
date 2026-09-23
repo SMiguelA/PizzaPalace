@@ -2,6 +2,7 @@ package com.pizzeria.PizzaPalace.domain.services;
 
 import com.pizzeria.PizzaPalace.persistence.entities.OrderEntity;
 import com.pizzeria.PizzaPalace.persistence.entityRepositories.OrderRepository;
+import com.pizzeria.PizzaPalace.persistence.projection.OrderSummary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +33,13 @@ public class OrderService {
     public List<OrderEntity> getByDeliveryMethod(){
         List<String> methods = Arrays.asList(DELIVERY, CARRYOUT);
         return this.orderRepository.findAllByDeliveryMethodIn(methods);
+    }
+
+    public List<OrderEntity> getCustomerOrders(Long idCustomer){
+        return this.orderRepository.findCustomerOrders(idCustomer);
+    }
+
+    public OrderSummary getSummary(Long id){
+        return this.orderRepository.findSummary(id);
     }
 }

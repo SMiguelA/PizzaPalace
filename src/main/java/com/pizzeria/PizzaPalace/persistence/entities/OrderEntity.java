@@ -46,5 +46,6 @@ public class OrderEntity {
 
     // referenciamos el nombre del atributo de la entidad donde realizamos el join, en este caso desde OrderItemEntity
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+    @OrderBy("price ASC")
     private List<OrderItemEntity> itemsAdded;
 }

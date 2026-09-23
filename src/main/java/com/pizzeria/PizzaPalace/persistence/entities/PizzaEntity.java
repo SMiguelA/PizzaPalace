@@ -1,12 +1,17 @@
 package com.pizzeria.PizzaPalace.persistence.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "pizza")
@@ -14,6 +19,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class PizzaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,4 +44,14 @@ public class PizzaEntity {
 
     @Column(nullable = false)
     private boolean isAvailable;
+
+    @Column(name = "created_date")
+    @CreatedDate
+    @JsonIgnore
+    private LocalDateTime createdDate;
+
+    @Column(name = "modified_date")
+    @JsonIgnore
+    @LastModifiedDate
+    private LocalDateTime modifiedDate;
 }

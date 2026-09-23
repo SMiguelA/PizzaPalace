@@ -2,6 +2,7 @@ package com.pizzeria.PizzaPalace.web;
 
 import com.pizzeria.PizzaPalace.domain.services.OrderService;
 import com.pizzeria.PizzaPalace.persistence.entities.OrderEntity;
+import com.pizzeria.PizzaPalace.persistence.projection.OrderSummary;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,5 +39,15 @@ public class OrderController {
     @GetMapping("/delivery")
     public ResponseEntity<List<OrderEntity>> getByMethod(){
         return ResponseEntity.ok(this.orderService.getByDeliveryMethod());
+    }
+
+    @GetMapping("/customer/{id}")
+    public ResponseEntity<List<OrderEntity>> getCustomerOrders(@PathVariable Long id){
+        return ResponseEntity.ok(this.orderService.getCustomerOrders(id));
+    }
+
+    @GetMapping("/summary/{id}")
+    public ResponseEntity<OrderSummary> getSummary(@PathVariable Long id){
+        return ResponseEntity.ok(this.orderService.getSummary(id));
     }
 }
