@@ -1,6 +1,7 @@
 package com.pizzeria.PizzaPalace.persistence.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.pizzeria.PizzaPalace.persistence.audit.AuditPizzaListener;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import lombok.Getter;
@@ -19,7 +20,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
+@EntityListeners({AuditingEntityListener.class, AuditPizzaListener.class})
 public class PizzaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
