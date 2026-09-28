@@ -1,4 +1,4 @@
-package com.pizzeria.PizzaPalace.web;
+package com.pizzeria.PizzaPalace.web.controllers;
 
 import com.pizzeria.PizzaPalace.domain.services.CustomerService;
 import com.pizzeria.PizzaPalace.persistence.entities.CustomerEntity;

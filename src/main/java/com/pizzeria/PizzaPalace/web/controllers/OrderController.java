@@ -1,9 +1,8 @@
-package com.pizzeria.PizzaPalace.web;
+package com.pizzeria.PizzaPalace.web.controllers;
 
 import com.pizzeria.PizzaPalace.domain.services.OrderService;
 import com.pizzeria.PizzaPalace.persistence.entities.OrderEntity;
 import com.pizzeria.PizzaPalace.persistence.projection.OrderSummary;
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
