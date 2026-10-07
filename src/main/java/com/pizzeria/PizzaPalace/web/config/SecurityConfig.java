@@ -57,24 +57,24 @@ public class SecurityConfig {
         return source;
     }
 
-    @Bean
-    public UserDetailsService createMemoryUser() {
-
-        // in memory user, this does not affect the BD
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(passwordEncoder().encode("admin"))
-                .roles("ADMIN")
-                .build();
-
-        UserDetails customer = User.builder()
-                .username("customer")
-                .password(passwordEncoder().encode("customer"))
-                .roles("CUSTOMER")
-                .build();
-
-        return new InMemoryUserDetailsManager(admin, customer);
-    }
+//    @Bean
+//    public UserDetailsService createMemoryUser() {
+//
+//        // in memory user, this does not affect the BD
+//        UserDetails admin = User.builder()
+//                .username("admin")
+//                .password(passwordEncoder().encode("admin"))
+//                .roles("ADMIN")
+//                .build();
+//
+//        UserDetails customer = User.builder()
+//                .username("customer")
+//                .password(passwordEncoder().encode("customer"))
+//                .roles("CUSTOMER")
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(admin, customer);
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder(){
